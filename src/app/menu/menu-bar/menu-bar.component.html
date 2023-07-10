@@ -1,0 +1,31 @@
+<p>
+    <mat-toolbar color="primary">
+      <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Pay Assistent</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" opened="false" mode="side">
+        <mat-nav-list>
+          <mat-list-item>
+              <button class="btn-side" mat-raised-button color="primary" routerLink="/contestations"><mat-icon>dashboard</mat-icon>Contestação</button>
+          </mat-list-item>
+          <mat-list-item>
+              <button mat-button routerLink="/contestations"><mat-icon>dashboard</mat-icon>Contestação</button>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-drawer>
+      <mat-drawer-content class="example-sidenav-content">
+          <router-outlet></router-outlet>
+      </mat-drawer-content>
+    </mat-drawer-container>
+</p>

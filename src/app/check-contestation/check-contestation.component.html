@@ -1,0 +1,62 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<form class="form" *ngIf="!isLoading">
+    <div class="form-content">
+        <div class="form-row-1">
+
+            <mat-form-field class="form-field-document" appearance="outline" >
+                <mat-label>Documento</mat-label>
+                <input matInput type="text" [(ngModel)]="checkContestation.document" 
+                    name="document" #document
+                    [formControl]="documentFormControl"
+                    maxlength="14"
+                    (input)="onValueChange()" >
+                <mat-error *ngIf="documentFormControl.hasError('required')">
+                    Campo <strong>Obrigatório</strong>
+                </mat-error>
+                <button *ngIf="checkContestation.document" matSuffix mat-icon-button aria-label="Clear" (click)="checkContestation.document=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field class="form-field-merchant" appearance="outline">
+                <mat-label>Site solicitante</mat-label>
+                <input matInput type="text" [(ngModel)]="checkContestation.merchant" 
+                    name="merchant" oninput="this.value = this.value.toUpperCase()" 
+                    [formControl]="merchantFormControl"
+                    maxlength="30"
+                    (input)="onValueChange()">
+                <mat-error *ngIf="merchantFormControl.hasError('required')">
+                    Campo <strong>Obrigatório</strong>
+                </mat-error>
+                <button *ngIf="checkContestation.merchant" matSuffix mat-icon-button aria-label="Clear" (click)="checkContestation.merchant=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button class="button" mat-fab color="primary" *ngIf="isValueChanged" (click)="check()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button class="button" mat-fab color="primary" *ngIf="!isValueChanged" (click)="new()">
+                <mat-icon>clear</mat-icon>
+            </button>
+
+        </div>
+
+        <div class="form-row-2">
+            <mat-form-field class="text-area" appearance="outline" *ngIf="!isValueChanged">
+                <button mat-raised-button color="primary" 
+                (click)="copyResultToClipBoard()"
+                class="btn-copy">Copiar conteúdo
+                    <mat-icon>flip_to_front</mat-icon>
+                </button>
+                <mat-label>Resultado</mat-label>
+                <textarea [(ngModel)]="checkContestation.result" 
+                matInput name="result" matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="15"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+</form>

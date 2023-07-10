@@ -1,0 +1,25 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.example-container {
+    width: 100%;
+    height: 550px;
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+}
+
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: first baseline;
+    justify-content: center;
+}
+
+.example-sidenav {
+    padding: 20px;
+}
+
+.btn-side {
+    width: 100%;
+    /* margin-bottom: 10px; */
+}
