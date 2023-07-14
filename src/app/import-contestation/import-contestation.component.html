@@ -1,0 +1,25 @@
+
+<mat-progress-bar class="progress" *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<form class="form">     
+    <div class="form-content">
+        <div class="form-row-1">
+
+            <mat-form-field class="form-field-filePath" appearance="outline" >
+                <mat-label>Arquivo</mat-label>
+                <input matInput type="text" [(ngModel)]="importContestation.fileName" name="fileName" #fileName readonly (input)="onValueChange()" placeholder="Nenhum arquivo selecionado">
+            </mat-form-field>
+
+            <button class="button" mat-fab color="primary" *ngIf="isValueChanged" (click)="fileUpload.click()">
+                <mat-icon>upload_file</mat-icon>
+            </button>
+            <button class="button" mat-fab color="primary" *ngIf="!isValueChanged" (click)="new()">
+                <mat-icon>clear</mat-icon>
+            </button>
+
+        </div>
+    </div>
+
+    <input  type="file" accept=".xlsx" style="display: none" (change)="onFileSelected($event)" #fileUpload>
+
+</form>
+

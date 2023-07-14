@@ -1,16 +1,15 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { ContestationService } from '../service/contestation.service';
 import { CheckContestationDTO } from '../model/CheckContestation';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-check-contestation',
   templateUrl: './check-contestation.component.html',
   styleUrls: ['./check-contestation.component.css']
 })
-export class CheckContestationComponent {
+export class CheckContestationComponent implements AfterViewChecked {
 
   @ViewChild('document') documentInputElement: ElementRef;
 
@@ -25,8 +24,13 @@ export class CheckContestationComponent {
 
   constructor(
     private service:ContestationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private readonly changeDetectorRef: ChangeDetectorRef
   ) { }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
+  }
 
   check():void {
     this.documentFormControl.addValidators(Validators.required);
@@ -41,9 +45,10 @@ export class CheckContestationComponent {
     .subscribe(result => { 
       this.checkContestation = result;
       this.isValueChanged = false;
-    })
 
-    this.isLoading = false;
+      this.isLoading = false;
+    })
+    
   }
 
   onValueChange() {
