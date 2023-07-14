@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CheckContestationDTO } from '../model/CheckContestation.js';
 import { HttpUtils } from '../http';
+import { environment } from 'src/environments/environment';
+import { ImportContestationDTO } from '../model/ImportContestationDTO.js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContestationService {
 
-  //private url:string = 'http://localhost:8080/contestation';
+  private readonly URL_API = `${environment.API}contestation/`;
  
   constructor(
     private http:HttpClient, 
@@ -23,8 +25,13 @@ export class ContestationService {
   }
 
   check(check:CheckContestationDTO): Observable<any> {
-    const url = `${this.utils.apiUrl}contestation/check`;
+    const url = `${this.URL_API}check`;
     return this.http.post<CheckContestationDTO>(url, check);
+  }
+
+  import(file:FormData): Observable<any> {
+    const url = `${this.URL_API}import`;
+    return this.http.post<any>(url, file);
   }
 
 }

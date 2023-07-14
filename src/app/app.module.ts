@@ -18,6 +18,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
+import { ImportContestationComponent } from './import-contestation/import-contestation.component';
 
 
 
@@ -26,7 +27,8 @@ import {MatMenuModule} from '@angular/material/menu';
     AppComponent,
     CheckContestationComponent,
     HomeComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    ImportContestationComponent
   ],
   imports: [
     BrowserModule,
