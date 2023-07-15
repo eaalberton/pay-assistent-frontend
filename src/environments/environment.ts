@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    API: 'pay-assistent-production.up.railway.app/'
+    API: 'https://pay-assistent-production.up.railway.app/'
 };
