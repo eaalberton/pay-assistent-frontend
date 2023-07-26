@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CheckContestationComponent } from './check-contestation/check-contestation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import { ImportContestationComponent } from './import-contestation/import-contestation.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { TokenInterceptorService } from './service/token-interceptor.service';
 
 
 
@@ -28,7 +30,8 @@ import { ImportContestationComponent } from './import-contestation/import-contes
     CheckContestationComponent,
     HomeComponent,
     MenuBarComponent,
-    ImportContestationComponent
+    ImportContestationComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { ImportContestationComponent } from './import-contestation/import-contes
     MatListModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
