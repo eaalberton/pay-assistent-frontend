@@ -1,9 +1,9 @@
 <p>
     <mat-toolbar color="primary">
-      <button *ngIf="isLogged" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <button *ngIf="isLogged" [@rotate]="isLogged" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>PB Assistent</span>
+      <span [@move]="isLogged">PB Assistent</span>
       <span class="example-spacer"></span>
       <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>favorite</mat-icon>

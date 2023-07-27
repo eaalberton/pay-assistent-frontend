@@ -21,6 +21,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ImportContestationComponent } from './import-contestation/import-contestation.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
+import { HttpErrorInterceptor } from './service/http-error.interceptor';
 
 
 
@@ -48,9 +49,21 @@ import { TokenInterceptorService } from './service/token-interceptor.service';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    BrowserAnimationsModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: TokenInterceptorService, 
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
