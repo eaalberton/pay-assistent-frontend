@@ -3,6 +3,7 @@ import { ContestationService } from '../service/contestation.service';
 import { CheckContestationDTO } from '../model/CheckContestation';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-check-contestation',
@@ -25,8 +26,17 @@ export class CheckContestationComponent implements AfterViewChecked {
   constructor(
     private service:ContestationService,
     private _snackBar: MatSnackBar,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private authService: AuthService
   ) { }
+
+  ngOnInit() {
+    this.validadeAuth();
+  }
+
+  validadeAuth() {
+    this.authService.validadeAuth().subscribe()
+  }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();

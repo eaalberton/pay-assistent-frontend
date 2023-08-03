@@ -43,4 +43,11 @@ export class AuthService {
     const url = `${this.URL_API}register`;
     return this.http.post<CheckContestationDTO>(url, credentialsDto);
   }
+
+  validadeAuth(): Observable<any> {
+    //const headers = new HttpHeaders({ 'Content-Type': 'text/xml; charset=utf-8;' });
+    //const options = {headers, responseType: 'text' as 'json'};
+    const url = `${this.URL_API}validate`;
+    return this.http.get<string>(url);//, options);
+  }
 }
