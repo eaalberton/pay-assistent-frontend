@@ -1,15 +1,15 @@
 <p>
     <mat-toolbar color="primary">
-      <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <button *ngIf="isLogged" [@rotate]="isLogged" (click)="drawer.toggle()" matTooltip="Menu" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Pay Assistent</span>
+      <span [@move]="isLogged">PB Assistent</span>
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
+      </button> -->
+      <button *ngIf="isLogged" routerLink="/auth" matTooltip="Sair" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
 
@@ -17,10 +17,10 @@
       <mat-drawer #drawer class="example-sidenav" opened="false" mode="side">
         <mat-nav-list>
           <mat-list-item>
-              <button class="btn-side" mat-raised-button color="primary" routerLink="/check-contestations"><mat-icon>search</mat-icon>Pesquisar Contestações</button>
+              <button (click)="drawer.toggle()" class="btn-side" mat-raised-button color="primary" routerLink="/check-contestations"><mat-icon>search</mat-icon>Pesquisar Contestações</button>
           </mat-list-item>
           <mat-list-item>
-              <button class="btn-side" mat-raised-button color="primary" routerLink="/import-contestations"><mat-icon>file_upload</mat-icon>Importar Contestações</button>
+              <button (click)="drawer.toggle()" class="btn-side" mat-raised-button color="primary" routerLink="/import-contestations"><mat-icon>file_upload</mat-icon>Importar Contestações</button>
           </mat-list-item>
         </mat-nav-list>
       </mat-drawer>

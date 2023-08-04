@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { CheckContestationDTO } from '../model/CheckContestation.js';
 import { HttpUtils } from '../http';
 import { environment } from 'src/environments/environment';
-import { ImportContestationDTO } from '../model/ImportContestationDTO.js';
 
 @Injectable({
   providedIn: 'root'
