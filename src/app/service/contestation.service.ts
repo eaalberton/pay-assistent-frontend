@@ -28,6 +28,11 @@ export class ContestationService {
     return this.http.post<CheckContestationDTO>(url, check);
   }
 
+  checkEnglish(check:CheckContestationDTO): Observable<any> {
+    const url = `${this.URL_API}check-en`;
+    return this.http.post<CheckContestationDTO>(url, check);
+  }
+
   import(file:FormData): Observable<any> {
     const url = `${this.URL_API}import`;
     return this.http.post<any>(url, file);

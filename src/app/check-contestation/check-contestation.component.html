@@ -43,16 +43,23 @@
         <div class="form-row-2">
             <mat-form-field class="text-area" appearance="outline" *ngIf="!isValueChanged">
                 <button mat-raised-button color="primary" 
-                (click)="copyResultToClipBoard()"
-                class="btn-copy">Copiar conteúdo
+                    (click)="copyResultToClipBoard()"
+                    class="btn-copy">Copiar conteúdo
                     <mat-icon>flip_to_front</mat-icon>
+                </button>
+                <button mat-raised-button color="primary" 
+                    (click)="checkEnglish()"
+                    class="btn-en" matTooltip="Exibir resposta em Inglês">EN
+                    <mat-icon>autorenew</mat-icon>
                 </button>
                 <mat-label>Resultado</mat-label>
                 <textarea [(ngModel)]="checkContestation.result" 
-                matInput name="result" matInput
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="15"></textarea>
+                    matInput name="result" matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="15"
+                    spellcheck="false">
+                </textarea>
             </mat-form-field>
         </div>
     </div>
