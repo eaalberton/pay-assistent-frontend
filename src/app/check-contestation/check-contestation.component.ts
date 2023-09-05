@@ -58,7 +58,24 @@ export class CheckContestationComponent implements AfterViewChecked {
 
       this.isLoading = false;
     })
-    
+  }
+
+  checkEnglish():void {
+    this.documentFormControl.addValidators(Validators.required);
+    this.merchantFormControl.addValidators(Validators.required);
+
+    if (!this.isValid())
+      return;
+
+    this.isLoading = true;
+
+    this.service.checkEnglish(this.checkContestation)
+    .subscribe(result => { 
+      this.checkContestation = result;
+      this.isValueChanged = false;
+
+      this.isLoading = false;
+    })
   }
 
   onValueChange() {
