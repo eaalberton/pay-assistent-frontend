@@ -1,0 +1,162 @@
+<h3 mat-dialog-title>Atendimentos por Merchant</h3>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<mat-dialog-content >
+    <div class="form-row-1">
+
+        <mat-form-field class="form-field-merchant" appearance="outline">
+            <mat-label>Merchant</mat-label>
+            <input class="disabled" matInput type="text" [(ngModel)]="data.customerService.merchant.name" 
+                name="merchant" oninput="this.value = this.value.toUpperCase()" 
+                maxlength="200" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-platform" appearance="outline">
+            <mat-label>Plataforma</mat-label>
+            <input class="disabled" matInput type="text" [(ngModel)]="data.customerService.merchant.platform"
+                name="platform" oninput="this.value = this.value.toUpperCase()" 
+                maxlength="100" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-supportLevel" appearance="outline">
+            <mat-label>Nível Sup.</mat-label>
+            <mat-select [(value)]="data.customerService.supportLevel" name="supportLevel">
+                <mat-option *ngFor="let supportLevel of supportLevels" [value]="supportLevel.value">{{supportLevel.value}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button class="button-close" matTooltip="Fechar"
+            mat-fab color="accent" (click)="cancel()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </div> 
+    
+    <div class="form-row-2">
+
+        <mat-form-field class="form-field-quantity" appearance="outline">
+            <mat-label>Quantidade</mat-label>
+            <input matInput class="center" type="number" maxlength="4" min="1" [(ngModel)]="data.customerService.quantity"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            [formControl]="quantityFormControl">
+            <mat-error *ngIf="quantityFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-request" appearance="outline">
+            <mat-label>Atendimento</mat-label>
+            <mat-select [(value)]="data.customerService.request" name="request" #request [formControl]="requestFormControl">
+                <mat-option>
+                <ngx-mat-select-search (keyup)="onKey($any($event.target).value)" 
+                        [placeholderLabel]="'Search'"
+                    noEntriesFoundLabel="No results found"></ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let request of selectedRequests" [value]="request">{{request.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="requestFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-time" appearance="outline">
+            <mat-label>Hora</mat-label>
+            <input class="center" matInput type="number" maxlength="2" min="00" max="23" [(ngModel)]="hoursStart"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            [formControl]="hourStartFormControl">
+            <mat-error *ngIf="hourStartFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+        :
+        <mat-form-field class="form-field-time" appearance="outline">
+            <mat-label>Minuto</mat-label>
+            <input class="center" matInput type="number" maxlength="2" min="00" max="59" [(ngModel)]="minutesStart"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            [formControl]="minuteStartFormControl">
+            <mat-error *ngIf="minuteStartFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+            até 
+        <mat-form-field class="form-field-time" appearance="outline">
+            <mat-label>Hora</mat-label>
+            <input class="center" matInput type="number" maxlength="2" min="00" max="23" [(ngModel)]="hoursEnd"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            [formControl]="hourEndFormControl">
+            <mat-error *ngIf="hourEndFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+        :
+        <mat-form-field class="form-field-time" appearance="outline">
+            <mat-label>Minuto</mat-label>
+            <input class="center" matInput type="number" maxlength="2" min="00" max="59" [(ngModel)]="minutesEnd"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            [formControl]="minuteEndFormControl">
+            <mat-error *ngIf="minuteEndFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <button class="button-add" mat-fab color="primary" matTooltip="Salvar"
+            *ngIf="isValueChanged" (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+
+    </div>
+   
+    <table *ngIf="showTable" mat-table [dataSource]="data.customerServices" class="mat-elevation-z8 table">
+        <!-- Request Column -->
+        <ng-container matColumnDef="request">
+          <th mat-header-cell *matHeaderCellDef>Atendimento</th>
+          <td mat-cell *matCellDef="let element">{{ element.request.name }}</td>
+        </ng-container>
+      
+        <!-- Platform Column -->
+        <ng-container matColumnDef="platformRequest">
+          <th mat-header-cell *matHeaderCellDef width="150">Plataforma Aten.</th>
+          <td mat-cell *matCellDef="let element">{{ element.merchant.platformRequest }}</td>
+        </ng-container>
+      
+        <!-- Support Level Column -->
+        <ng-container matColumnDef="supportLevel">
+          <th mat-header-cell *matHeaderCellDef width="100">Nível</th>
+          <td mat-cell class="align-center" *matCellDef="let element">{{ element.supportLevel }}</td>
+        </ng-container>
+      
+        <!-- Date Start Column -->
+        <ng-container matColumnDef="dateStart">
+          <th mat-header-cell *matHeaderCellDef width="145">Hora Início</th>
+          <td mat-cell *matCellDef="let element">{{ element.dateStart }}</td>
+        </ng-container>
+
+        <!-- Date End Column -->
+        <ng-container matColumnDef="dateEnd">
+          <th mat-header-cell *matHeaderCellDef width="145">Hora Fim</th>
+          <td mat-cell *matCellDef="let element">{{ element.dateEnd }}</td>
+        </ng-container>
+
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef width="90">Quantidade</th>
+          <td mat-cell class="align-center" *matCellDef="let element">{{ element.quantity }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef width="30" class="action-column"></th>
+
+            <td mat-cell *matCellDef="let element" class="action-column">
+                <button mat-mini-fab class="small-icon-button"
+                    color="basic" matTooltip="Remover atendimento"
+                    (click)="remove(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+</mat-dialog-content>

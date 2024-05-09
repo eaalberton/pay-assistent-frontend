@@ -55,6 +55,8 @@ export class LoginFormComponent implements AfterViewChecked  {
 
       this.service.setAuthToken(this.user.token);
 
+      this.service.setUserId(this.user.id);
+
       this.router.navigate(['/']);
     })
     
