@@ -110,3 +110,10 @@ tr.mat-mdc-footer-row td {
     border-top: 2px solid currentColor;
     padding-right: 24px;
 }
+ 
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    background-color: rgb(216, 210, 212);
+    font-weight: bold;
+}

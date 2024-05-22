@@ -87,6 +87,13 @@ input[type="button"]{
     text-align: center;
 }
 
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    background-color: rgb(216, 210, 212);
+    font-weight: bold;
+}
+
 .small-icon-button {
     width: 20px !important;
     height: 20px !important;

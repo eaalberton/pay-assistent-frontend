@@ -192,8 +192,17 @@ export class CustomerServiceSummaryComponent implements AfterViewChecked {
     this._snackBar.open(message, action, { duration: 4000 });
   }
 
-  add(serviceSummary: ServiceSummaryDto){
+  addWithExistingMerchant(serviceSummary: ServiceSummaryDto){
     this.selectedMerchant = this.merchants.find(option => option.id === serviceSummary.id) ?? new Merchant;
+    
+    this.merchantFormControl.clearValidators();
+    
+    this.openDialog();
+  }
+
+  addNewMerchantRequest() {
+    this.merchantFormControl.addValidators(Validators.required);
+
     this.openDialog();
   }
 
@@ -206,19 +215,19 @@ export class CustomerServiceSummaryComponent implements AfterViewChecked {
   isValid():boolean {
     this.merchantFormControl.updateValueAndValidity();
 
+    console.log(this.merchantFormControl.errors);
+
     if (this.merchantFormControl.errors)
       return false;
 
-    if (this.selectedMerchant == null)
+    if (this.selectedMerchant == undefined)
       return false;
 
     return true;
   }
 
 
-  openDialog(): void {
-
-    this.merchantFormControl.addValidators(Validators.required);
+  openDialog() {
 
     if (!this.isValid())
       return;

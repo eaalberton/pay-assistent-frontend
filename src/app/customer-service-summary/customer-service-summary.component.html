@@ -32,7 +32,7 @@
                 </mat-error>
             </mat-form-field>
 
-            <button class="button" mat-fab color="primary" (click)="openDialog()">
+            <button class="button" mat-fab color="primary" (click)="addNewMerchantRequest()">
                 <mat-icon>add</mat-icon>
             </button>
 
@@ -44,7 +44,7 @@
                 <ng-container matColumnDef="merchant">
                   <th mat-header-cell *matHeaderCellDef>Merchant</th>
                   <td mat-cell *matCellDef="let element">{{ element.merchant }}</td>
-                  <td mat-footer-cell *matFooterCellDef class="align-right"> Total: </td>
+                  <td mat-footer-cell *matFooterCellDef class="align-right"> Total de atendimentos: </td>
                 </ng-container>
               
                 <!-- Quantity Column -->
@@ -61,7 +61,7 @@
                     <td mat-cell *matCellDef="let element" class="action-column">
                         <button mat-mini-fab class="small-icon-button"
                             color="primary" matTooltip="Novo atendimento"
-                            (click)="add(element)">
+                            (click)="addWithExistingMerchant(element)">
                             <mat-icon>add</mat-icon>
                         </button>
                     </td>
