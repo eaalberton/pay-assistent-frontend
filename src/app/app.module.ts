@@ -19,10 +19,18 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { ImportContestationComponent } from './import-contestation/import-contestation.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
 import { HttpErrorInterceptor } from './service/http-error.interceptor';
+import { CustomerServiceSummaryComponent } from './customer-service-summary/customer-service-summary.component';
+import { CustomerServiceDetailComponent } from './customer-service-detail/customer-service-detail.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconButtonSizesModule } from 'mat-icon-button-sizes';
 
 
 
@@ -33,7 +41,9 @@ import { HttpErrorInterceptor } from './service/http-error.interceptor';
     HomeComponent,
     MenuBarComponent,
     ImportContestationComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    CustomerServiceSummaryComponent,
+    CustomerServiceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +62,13 @@ import { HttpErrorInterceptor } from './service/http-error.interceptor';
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule,
+    MatDialogModule,
+    MatTableModule,
+    MatCardModule,
+    MatIconButtonSizesModule,
   ],
   providers: [
     {
