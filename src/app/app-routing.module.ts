@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { CheckContestationComponent } from './check-contestation/check-contestation.component';
 import { ImportContestationComponent } from './import-contestation/import-contestation.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { CustomerServiceSummaryComponent } from './customer-service-summary/customer-service-summary.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: 'import-contestations',
     component: ImportContestationComponent,
     data: { title: 'Contestações', role: 'contestations' }
+  },
+  {
+    path: 'service-management',
+    component: CustomerServiceSummaryComponent,
+    data: { title: 'Atendimentos', role: 'service' }
   },
   {
     path: 'auth',
