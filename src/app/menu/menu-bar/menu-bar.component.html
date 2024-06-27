@@ -8,6 +8,9 @@
       <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>favorite</mat-icon>
       </button> -->
+      <button *ngIf="isLogged" routerLink="/" matTooltip="Home" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>home</mat-icon>
+      </button>
       <button *ngIf="isLogged" routerLink="/auth" matTooltip="Sair" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>logout</mat-icon>
       </button>
@@ -24,6 +27,9 @@
           </mat-list-item>
           <mat-list-item>
             <button (click)="drawer.toggle()" class="btn-side" mat-raised-button color="accent" routerLink="/service-management"><mat-icon>headset_mic</mat-icon>Gestão de Atendimentos</button>
+          </mat-list-item>
+          <mat-list-item>
+            <button (click)="drawer.toggle()" class="btn-side" mat-raised-button color="accent" routerLink="/"><mat-icon>analytics_outlined</mat-icon>Relatório Atendimentos</button>
           </mat-list-item>
         </mat-nav-list>
       </mat-drawer>
