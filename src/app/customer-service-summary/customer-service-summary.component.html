@@ -12,7 +12,7 @@
 
             <mat-form-field class="form-field-shift" appearance="outline">
                 <mat-label>Turno</mat-label>
-                <mat-select [(value)]="user.shift" name="shift" >
+                <mat-select [(value)]="user.shift" name="shift" [disabled]="true" class="disabled">
                     <mat-option *ngFor="let shift of shifts" [value]="shift.value">{{shift.viewValue}}</mat-option>
                 </mat-select>
             </mat-form-field>
