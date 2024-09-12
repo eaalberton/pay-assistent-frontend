@@ -25,7 +25,7 @@
                          [placeholderLabel]="'Search'"
                         noEntriesFoundLabel="No results found"></ngx-mat-select-search>
                   </mat-option>
-                  <mat-option *ngFor="let merchant of selectedMerchants" [value]="merchant">{{merchant.name}} - {{merchant.platform}}</mat-option>
+                  <mat-option *ngFor="let merchant of selectedMerchants" [value]="merchant">{{merchant.name}} - {{merchant.platform}} - {{merchant.platformRequest}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="merchantFormControl.hasError('required')">
                     Campo <strong>Obrigatório</strong>
