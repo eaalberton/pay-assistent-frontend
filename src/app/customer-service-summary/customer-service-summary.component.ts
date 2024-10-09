@@ -41,6 +41,11 @@ export class SupportLevel {
   value: string;
 }
 
+export class Company {
+  value: string;
+  viewValue: string;
+}
+
 export class CustomerService {
   id: number;
 
@@ -59,6 +64,8 @@ export class CustomerService {
   supportLevel: string;
 
   quantity: number;
+
+  company: string;
 }
 
 export class ServiceSummaryDto {

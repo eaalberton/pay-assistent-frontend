@@ -1,6 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CustomerService, MerchantCustomerService, Request, SupportLevel } from '../customer-service-summary/customer-service-summary.component';
+import { Company, CustomerService, MerchantCustomerService, Request, SupportLevel } from '../customer-service-summary/customer-service-summary.component';
 import { MatSelect } from '@angular/material/select';
 import { FormControl, Validators } from '@angular/forms';
 import { CustomerServiceService } from '../service/customer-service.service';
@@ -32,6 +32,11 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
     {value: 'N3'},
   ];
 
+  companies: Company[] = [
+    {value: 'PAYBROKERS', viewValue: 'PAYBROKERS'},
+    {value: 'PAGFAST', viewValue: 'PAGFAST'},
+  ];
+
   quantity: number = 1;
 
   dateNow: Date = new Date();
@@ -46,7 +51,7 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
 
   minutesEnd = this.dateNow.getMinutes();
 
-  displayedColumns: string[] = ['request', 'platformRequest', 'supportLevel', 'dateStart', 'dateEnd', 'quantity', 'actions'];
+  displayedColumns: string[] = ['request', 'company', 'platformRequest', 'supportLevel', 'dateStart', 'dateEnd', 'quantity', 'actions'];
 
   isValueChanged:boolean = true;
 
@@ -54,6 +59,7 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
 
   showTable = false;
 
+  companyFormControl = new FormControl('', [Validators.required]);
   quantityFormControl = new FormControl('', [Validators.required]);
   requestFormControl = new FormControl('', [Validators.required]);
   hourStartFormControl = new FormControl('', [Validators.required]);
@@ -120,6 +126,7 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
   }
 
   new() {
+    this.companyFormControl.clearValidators();
     this.quantityFormControl.clearValidators();
     this.requestFormControl.clearValidators();
     this.hourStartFormControl.clearValidators();
@@ -147,6 +154,7 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
 
   add():void {
 
+    this.companyFormControl.addValidators(Validators.required);
     this.quantityFormControl.addValidators(Validators.required);
     this.requestFormControl.addValidators(Validators.required);
     this.hourStartFormControl.addValidators(Validators.required);
@@ -193,6 +201,7 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
   }
 
   isValid():boolean {
+    this.companyFormControl.updateValueAndValidity();
     this.quantityFormControl.updateValueAndValidity();
     this.requestFormControl.updateValueAndValidity();
     this.hourStartFormControl.updateValueAndValidity();
@@ -202,7 +211,8 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
 
     if (this.quantityFormControl.errors || this.requestFormControl.errors ||
     this.hourStartFormControl.errors || this.minuteStartFormControl.errors ||
-    this.hourEndFormControl.errors || this.minuteEndFormControl.errors)
+    this.hourEndFormControl.errors || this.minuteEndFormControl.errors || 
+    this.companyFormControl.errors)
       return false;
 
     if (this.data.customerService.quantity == null || this.data.customerService.request == null ||
