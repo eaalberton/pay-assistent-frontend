@@ -24,15 +24,6 @@
             </mat-select>
         </mat-form-field>
 
-        <button class="button-close" matTooltip="Fechar"
-            mat-fab color="accent" (click)="cancel()">
-            <mat-icon>close</mat-icon>
-        </button>
-
-    </div> 
-    
-    <div class="form-row-2">
-
         <mat-form-field class="form-field-quantity" appearance="outline">
             <mat-label>Quantidade</mat-label>
             <input matInput class="center" type="number" maxlength="4" min="1" [(ngModel)]="data.customerService.quantity"
@@ -42,6 +33,15 @@
                 Campo <strong>Obrigatório</strong>
             </mat-error>
         </mat-form-field>
+
+        <button class="button-close" matTooltip="Fechar"
+            mat-fab color="accent" (click)="cancel()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </div> 
+    
+    <div class="form-row-2">
 
         <mat-form-field class="form-field-request" appearance="outline">
             <mat-label>Atendimento</mat-label>
@@ -54,6 +54,16 @@
                 <mat-option *ngFor="let request of selectedRequests" [value]="request">{{request.name}}</mat-option>
             </mat-select>
             <mat-error *ngIf="requestFormControl.hasError('required')">
+                Campo <strong>Obrigatório</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-field-company" appearance="outline">
+            <mat-label>Canal</mat-label>
+            <mat-select [(value)]="data.customerService.company" name="company" [formControl]="companyFormControl" >
+                <mat-option *ngFor="let company of companies" [value]="company.value">{{company.value}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyFormControl.hasError('required')">
                 Campo <strong>Obrigatório</strong>
             </mat-error>
         </mat-form-field>
@@ -111,6 +121,12 @@
           <th mat-header-cell *matHeaderCellDef>Atendimento</th>
           <td mat-cell *matCellDef="let element">{{ element.request.name }}</td>
         </ng-container>
+
+        <!-- Canal Column -->
+        <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef width="100">Canal</th>
+            <td mat-cell *matCellDef="let element">{{ element.company }}</td>
+          </ng-container>
       
         <!-- Platform Column -->
         <ng-container matColumnDef="platformRequest">
@@ -120,7 +136,7 @@
       
         <!-- Support Level Column -->
         <ng-container matColumnDef="supportLevel">
-          <th mat-header-cell *matHeaderCellDef width="100">Nível</th>
+          <th mat-header-cell *matHeaderCellDef width="50">Nível</th>
           <td mat-cell class="align-center" *matCellDef="let element">{{ element.supportLevel }}</td>
         </ng-container>
       
