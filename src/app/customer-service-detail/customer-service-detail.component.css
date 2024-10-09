@@ -13,27 +13,32 @@ input[type="button"]{
 }
 
 .form-field-supportLevel {
-    width: 9.2%;
+    width: 9.7%;
     margin-right: 6px;
 }
 
 .form-field-platform {
-    width: 28%;
+    width: 32.8%;
     margin-right: 6px;
 }
 
 .form-field-merchant {
-    width: 55%;
-    margin-right: 6px;
-}
-
-.form-field-request {
-    width: 45%;
+    width: 40%;
     margin-right: 6px;
 }
 
 .form-field-quantity {
-    width: 9.3%;
+    width: 9.7%;
+    margin-right: 6px;
+}
+
+.form-field-request {
+    width: 40%;
+    margin-right: 6px;
+}
+
+.form-field-company {
+    width: 15%;
     margin-right: 6px;
 }
 
@@ -72,7 +77,7 @@ input[type="button"]{
 
 .mat-mdc-header-cell {
     color: rgb(236, 223, 223);
-    text-align: center;
+    text-align: left;
 }
 
 .mat-mdc-cell {
