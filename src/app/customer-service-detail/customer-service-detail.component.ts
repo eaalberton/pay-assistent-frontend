@@ -162,6 +162,7 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
     this.hourEndFormControl.addValidators(Validators.required);
     this.minuteEndFormControl.addValidators(Validators.required);
 
+    //it makes show required alert if the field has not been filled in
     this.companyFormControl.markAllAsTouched();
 
     if (!this.isValid())
