@@ -1,0 +1,45 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<form class="form">
+    <div class="form-content">
+        <div class="form-row-1">
+
+            <mat-form-field class="form-field-company" appearance="outline">
+                <mat-label>Canal</mat-label>
+                <mat-select [(value)]="receiptDTO.company" name="company" [formControl]="companyFormControl" >
+                    <mat-option *ngFor="let company of companies" [value]="company.value">{{company.value}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="companyFormControl.hasError('required')">
+                    Campo <strong>Obrigatório</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button class="button" mat-fab color="primary" *ngIf="isValueChanged" (click)="generateReceiptInMemory()">
+                <mat-icon>download</mat-icon>
+            </button>
+            <button class="button" mat-fab color="primary" *ngIf="!isValueChanged" (click)="new()">
+                <mat-icon>clear</mat-icon>
+            </button>
+
+            <mat-form-field class="text-area" appearance="outline">
+                
+                <mat-label>Metadados</mat-label>
+                <textarea [(ngModel)]="receiptDTO.metadata" [formControl]="metadataFormControl"
+                    matInput name="metadata" #metadata
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="15"
+                    spellcheck="false">
+                </textarea>
+                <mat-error *ngIf="metadataFormControl.hasError('required')">
+                    Campo <strong>Obrigatório</strong>
+                </mat-error>
+                <!--button *ngIf="receiptDTO.metadata" matSuffix mat-icon-button aria-label="Clear" (click)="receiptDTO.metadata=''">
+                  <mat-icon>close</mat-icon>
+                </button-->
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+</form>

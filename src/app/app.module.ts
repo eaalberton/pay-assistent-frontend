@@ -31,6 +31,7 @@ import { CustomerServiceDetailComponent } from './customer-service-detail/custom
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconButtonSizesModule } from 'mat-icon-button-sizes';
+import { ReceiptComponent } from './receipt/receipt.component';
 
 
 
@@ -43,7 +44,8 @@ import { MatIconButtonSizesModule } from 'mat-icon-button-sizes';
     ImportContestationComponent,
     LoginFormComponent,
     CustomerServiceSummaryComponent,
-    CustomerServiceDetailComponent
+    CustomerServiceDetailComponent,
+    ReceiptComponent
   ],
   imports: [
     BrowserModule,
