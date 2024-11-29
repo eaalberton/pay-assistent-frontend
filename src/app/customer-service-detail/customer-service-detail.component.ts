@@ -181,6 +181,12 @@ export class CustomerServiceDetailComponent implements AfterViewChecked {
     this.data.customerService.dateStart = (moment(this.dateStart)).format('DD/MM/YYYY HH:mm');
     this.data.customerService.dateEnd = (moment(this.dateNow)).format('DD/MM/YYYY HH:mm');
 
+    if (this.dateStart.getTime() > this.dateNow.getTime()) {
+      alert("Error: The start time cannot be greater than the end time!");
+      this.isLoading = false;
+      return;
+    }
+
     this.service.save(this.data.customerService)
     .subscribe(result => { 
 
